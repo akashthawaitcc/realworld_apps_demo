@@ -4,7 +4,7 @@ import slugify from 'slugify';
 import {definePrivateEventHandler} from "~/auth-event-handler";
 
 export default definePrivateEventHandler(async (event, {auth}) => {
-    const {article} = await readBody(event);
+    const {article} = readBody(event);
 
     const { title, description, body, tagList } = article;
     const tags = Array.isArray(tagList) ? tagList : [];
@@ -32,9 +32,9 @@ export default definePrivateEventHandler(async (event, {auth}) => {
         },
     });
 
-    if (existingTitle) {
-        throw new HttpException(422, { errors: { title: ['must be unique'] } });
-    }
+    // if (existingTitle) {
+    //     throw new HttpException(422, { errors: { title: ['must be unique'] } });
+    // }
 
     const {
         authorId,
